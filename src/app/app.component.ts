@@ -1,13 +1,7 @@
 import type { OnInit } from "@angular/core";
-import { NgFor } from "@angular/common";
 import { StateService } from "./state.service";
 
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  ElementRef,
-  viewChild,
-} from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 import { setAssetPath } from "@esri/calcite-components/dist/components";
 
