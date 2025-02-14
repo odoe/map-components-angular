@@ -1,4 +1,5 @@
 import type { OnInit } from "@angular/core";
+import { Input } from "@angular/core";
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -6,18 +7,13 @@ import {
   viewChild,
 } from "@angular/core";
 
-import { setAssetPath } from "@esri/calcite-components/dist/components";
-
-import "@arcgis/core/assets/esri/themes/dark/main.css";
-
-import "@arcgis/map-components/dist/components/arcgis-map";
-import "@arcgis/map-components/dist/components/arcgis-zoom";
-import "@arcgis/map-components/dist/components/arcgis-search";
+import "@arcgis/map-components/dist/components/arcgis-expand";
 import "@arcgis/map-components/dist/components/arcgis-legend";
+import "@arcgis/map-components/dist/components/arcgis-map";
+import "@arcgis/map-components/dist/components/arcgis-search";
+import "@arcgis/map-components/dist/components/arcgis-zoom";
 
-setAssetPath(
-  "https://cdn.jsdelivr.net/npm/@esri/calcite-components@3.0.0-next.120/dist/calcite/assets",
-);
+import FeatureLayer from "@arcgis/core/layers/FeatureLayer.js";
 
 @Component({
   selector: "app-map",
@@ -26,14 +22,26 @@ setAssetPath(
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MapComponent implements OnInit {
+  @Input() filter: string = "";
   myMap = viewChild<ElementRef<HTMLArcgisMapElement>>("myMap");
 
   arcgisViewReadyChange(event: HTMLArcgisMapElement["arcgisViewReadyChange"]) {
-    console.log("View ready", this.myMap()?.nativeElement);
-    console.log("MapView ready", event);
+    const element = event.target;
+    const layer = new FeatureLayer({
+      portalItem: {
+        id: "a453b9a8ccae4c178ae28621c62307bf",
+      },
+      definitionExpression: `fuel1 = '${this.filter}'`,
+    });
+
+    element.addLayer(layer);
+
+    layer.when(() => {
+      element.extent = layer.fullExtent!;
+    });
   }
 
   ngOnInit() {
-    console.log("OnInit");
+    console.log("app-map");
   }
 }

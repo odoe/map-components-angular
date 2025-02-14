@@ -1,0 +1,9 @@
+@defer (on timer(500ms)) {
+  <calcite-list label="Power Plants" scale="l" selection-mode="single">
+    @for (item of items; track item) {
+      <calcite-list-item [label]="item" [value]="item" (click)="updateSelectedItem(item)"></calcite-list-item>
+    }
+  </calcite-list>
+} @placeholder {
+  <calcite-loader label="Loading Power Plants..."></calcite-loader>
+}

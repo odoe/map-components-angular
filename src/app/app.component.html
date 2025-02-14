@@ -1,9 +1,7 @@
-@defer (on timer(500ms)) {
-  <calcite-list label="Power Plants" scale="l" selection-mode="single">
-    @for (item of items; track item) {
-      <calcite-list-item [label]="item" [value]="item"></calcite-list-item>
-    }
-  </calcite-list>
-} @placeholder {
-  <calcite-loader label="Loading Power Plants..."></calcite-loader>
-}
+<app-layout>
+  @if (selectedItem) {
+    <app-map [filter]=selectedItem></app-map>
+  } @else {
+    <app-home (selectedItemChange)="onSelectedItemChange($event)"></app-home>
+  }
+</app-layout>

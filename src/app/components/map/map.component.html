@@ -1,14 +1,12 @@
 @defer {
   <arcgis-map
     #myMap
-    item-id="d5dda743788a4b0688fe48f43ae7beb9"
+    basemap="dark-gray-vector"
     (arcgisViewReadyChange)="arcgisViewReadyChange($event)"
   >
-    <arcgis-zoom position="top-left"></arcgis-zoom>
-    <arcgis-expand>
-      <arcgis-search position="top-right"></arcgis-search>
+    <arcgis-expand position="bottom-left">
+      <arcgis-legend respect-layer-definition-expression></arcgis-legend>
     </arcgis-expand>
-    <arcgis-legend position="bottom-left"></arcgis-legend>
   </arcgis-map>
 } @placeholder {
   <calcite-loader label="Loading Map..."></calcite-loader>

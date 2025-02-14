@@ -1,5 +1,4 @@
 import type { OnInit } from "@angular/core";
-import { StateService } from "./state.service";
 
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
@@ -13,26 +12,28 @@ import "@esri/calcite-components/components/calcite-loader";
 
 import "@arcgis/core/assets/esri/themes/dark/main.css";
 
+import { HomeComponent } from "./components/home/home.component";
+import { LayoutComponent } from "./components/layout/layout.component";
+import { MapComponent } from "./components/map/map.component";
+
 setAssetPath(
   "https://cdn.jsdelivr.net/npm/@esri/calcite-components@3.0.0-next.120/dist/calcite/assets",
 );
 
 @Component({
   selector: "app-root",
+  imports: [HomeComponent, LayoutComponent, MapComponent],
   standalone: true,
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppComponent implements OnInit {
-  constructor(private stateService: StateService) {}
-  items: string[] = [];
-  async loadData() {
-    const { types } = await this.stateService.loadData();
-    this.items = types;
+  selectedItem: string | null = null;
+  onSelectedItemChange(selectedItem: string | null) {
+    this.selectedItem = selectedItem;
   }
   ngOnInit() {
-    console.log("OnInit");
-    this.loadData();
+    console.log("app-root");
   }
 }
