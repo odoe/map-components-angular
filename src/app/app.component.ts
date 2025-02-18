@@ -1,11 +1,6 @@
 import type { OnInit } from "@angular/core";
 
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  HostListener,
-  inject,
-} from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from "@angular/core";
 
 import { setAssetPath } from "@esri/calcite-components/dist/components";
 
@@ -15,9 +10,7 @@ import "@esri/calcite-components/components/calcite-list";
 import "@esri/calcite-components/components/calcite-list-item";
 import "@esri/calcite-components/components/calcite-loader";
 
-import "@arcgis/core/assets/esri/themes/dark/main.css";
-
-import { ActivatedRoute, Router, RouterOutlet } from "@angular/router";
+import { Router, RouterOutlet } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LayoutComponent } from "./components/layout/layout.component";
 import { StateService } from "./state.service";
@@ -35,7 +28,6 @@ setAssetPath(
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
   selectedItem: string | null = null;

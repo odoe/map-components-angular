@@ -19,7 +19,6 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer.js";
 @Component({
   selector: "app-map",
   templateUrl: "./map.component.html",
-  styleUrl: "./map.component.css",
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MapComponent implements OnInit {

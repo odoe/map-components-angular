@@ -3,13 +3,13 @@ import { HomeComponent } from "./components/home/home.component";
 
 export const routes: Routes = [
   {
-    path: "home",
+    path: "",
     component: HomeComponent,
+    pathMatch: "full",
   },
   {
     path: "map",
     loadComponent: () =>
       import("./components/map/map.component").then((m) => m.MapComponent),
   },
-  { path: "", redirectTo: "/home", pathMatch: "full" },
 ];
