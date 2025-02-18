@@ -1,10 +1,9 @@
 import type { OnInit } from "@angular/core";
-import { Input } from "@angular/core";
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
-  ElementRef,
-  viewChild,
+  inject,
+  Input,
 } from "@angular/core";
 
 import "@arcgis/map-components/dist/components/arcgis-expand";
@@ -12,6 +11,8 @@ import "@arcgis/map-components/dist/components/arcgis-legend";
 import "@arcgis/map-components/dist/components/arcgis-map";
 import "@arcgis/map-components/dist/components/arcgis-search";
 import "@arcgis/map-components/dist/components/arcgis-zoom";
+
+import { ActivatedRoute } from "@angular/router";
 
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer.js";
 
@@ -22,8 +23,9 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer.js";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MapComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+
   @Input() filter: string = "";
-  myMap = viewChild<ElementRef<HTMLArcgisMapElement>>("myMap");
 
   arcgisViewReadyChange(event: HTMLArcgisMapElement["arcgisViewReadyChange"]) {
     const element = event.target;
@@ -42,6 +44,8 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("app-map");
+    this.route.queryParams.subscribe((params) => {
+      this.filter = params["filter"];
+    });
   }
 }

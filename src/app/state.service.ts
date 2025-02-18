@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { executeQueryJSON } from "@arcgis/core/rest/query";
 
 const PLANT_URL =
@@ -12,6 +13,14 @@ export type Data = {
   providedIn: "root",
 })
 export class StateService {
+  private filterSubject = new Subject<string>();
+
+  filter$ = this.filterSubject.asObservable();
+
+  setFilter(filter: string) {
+    this.filterSubject.next(filter);
+  }
+
   constructor() {}
 
   async loadData(): Promise<Data> {

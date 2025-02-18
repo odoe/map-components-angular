@@ -6,6 +6,11 @@
       slot="logo"
     >
     </calcite-navigation-logo>
+    @if (!isHome) {
+      <calcite-menu slot="content-end">
+        <calcite-menu-item icon-start="home" text-enabled routerLink="/"></calcite-menu-item>
+      </calcite-menu>
+    }
   </calcite-navigation>
   <ng-content></ng-content>
 </calcite-shell>

@@ -1,5 +1,4 @@
 import type { OnInit } from "@angular/core";
-import { EventEmitter, Output } from "@angular/core";
 import { StateService } from "../../state.service";
 
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
@@ -18,20 +17,20 @@ import "@esri/calcite-components/components/calcite-loader";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent implements OnInit {
-  constructor(private stateService: StateService) {}
-  @Output() selectedItemChange = new EventEmitter<string | null>();
   items: string[] = [];
   selectedItem: string | null = null;
+
+  constructor(private stateService: StateService) {}
+
   updateSelectedItem(item: string) {
     this.selectedItem = item;
-    this.selectedItemChange.emit(this.selectedItem);
+    this.stateService.setFilter(this.selectedItem);
   }
   async loadData() {
     const { types } = await this.stateService.loadData();
     this.items = types;
   }
   ngOnInit() {
-    console.log("OnInit");
     this.loadData();
   }
 }

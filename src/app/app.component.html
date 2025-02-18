@@ -1,7 +1,3 @@
 <app-layout>
-  @if (selectedItem) {
-    <app-map [filter]=selectedItem></app-map>
-  } @else {
-    <app-home (selectedItemChange)="onSelectedItemChange($event)"></app-home>
-  }
+  <router-outlet></router-outlet>
 </app-layout>
