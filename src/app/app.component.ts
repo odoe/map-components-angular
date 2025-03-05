@@ -18,13 +18,10 @@ import { StateService } from "./state.service";
 export class AppComponent implements OnInit {
   private readonly router = inject(Router);
 
-  selectedItem: string | null = null;
-
   subscription: Subscription;
 
   constructor(private stateService: StateService) {
     this.subscription = this.stateService.filter$.subscribe((filter) => {
-      this.selectedItem = filter;
       this.router.navigate(["/map"], {
         queryParams: { filter: this.selectedItem },
       });

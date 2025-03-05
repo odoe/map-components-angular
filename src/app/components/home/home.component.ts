@@ -24,13 +24,11 @@ setAssetPath(
 })
 export class HomeComponent implements OnInit {
   items: string[] = [];
-  selectedItem: string | null = null;
 
   constructor(private stateService: StateService) {}
 
   updateSelectedItem(item: string) {
-    this.selectedItem = item;
-    this.stateService.setFilter(this.selectedItem);
+    this.stateService.setFilter(item);
   }
   async loadData() {
     const { types } = await this.stateService.loadData();
