@@ -1,4 +1,4 @@
-@defer (on timer(500ms)) {
+@defer {
   <calcite-list label="Power Plants" scale="l" selection-mode="single">
     @for (item of items; track item) {
       <calcite-list-item [label]="item" [value]="item" (click)="updateSelectedItem(item)"></calcite-list-item>
